@@ -4,7 +4,7 @@ outline: deep
 
 # Angular Data Binding (v17+) — Tài liệu chi tiết
 
-Tài liệu này mô tả **cơ chế gắn dữ liệu giữa class component và template** trong Angular ở mức độ dùng được trong dự án thật (docs cho developer). Kiến thức bổ trợ: [Templates](/content/basic/angular-templates-for-aem), [Components](/content/basic/angular-components-for-aem).
+Tài liệu này mô tả **cơ chế gắn dữ liệu giữa class component và template** trong Angular ở mức độ dùng được trong dự án thật (docs cho developer). Kiến thức bổ trợ: [Templates](/docs/basic/angular-templates-for-aem), [Components](/docs/basic/angular-component).
 
 **Tham khảo chính thức:** [Angular Templates](https://angular.dev/guide/templates/overview) và các mục *Property binding*, *Event binding*, *Two-way binding* trong cùng bộ Angular docs.
 
@@ -399,4 +399,4 @@ Chuỗi tĩnh            : attr="literal" (không cần [])
 
 - [Angular Templates overview](https://angular.dev/guide/templates/overview)
 - Bài trong cùng bộ docs site: **Templates — interpolation, bindings, directives** ([Templates guide](https://angular.dev/guide/templates))
-- Nội bộ: [Templates (AEM)](/content/basic/angular-templates-for-aem), [Components (AEM)](/content/basic/angular-components-for-aem)
+- Nội bộ: [Templates (AEM)](/docs/basic/angular-templates-for-aem), [Components (AEM)](/docs/basic/angular-component)
