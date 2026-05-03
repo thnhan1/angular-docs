@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# VitePress build output & cache
+.vitepress/dist/
+.vitepress/cache/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

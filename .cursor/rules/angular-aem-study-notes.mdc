@@ -1,0 +1,80 @@
+---
+description: Ghi chép học Angular (v17+) cho AEM developer — súc tích, không dẫn dắt thừa
+globs: content/**/*.md
+alwaysApply: true
+---
+
+## Angular 2026 Core Rules for AEM Projects
+
+### TypeScript Best Practices
+- Use strict type checking in `tsconfig.json`.
+- Prefer type inference when the type is obvious. Avoid explicit typing where unnecessary.
+- Never use `any`. Use `unknown` when the type is uncertain, then narrow it with type guards.
+
+### Angular Architecture (v20+)
+- Default is standalone. Never set `standalone: true` in decorators — it is the default in Angular v20+.
+- Do not use `@HostBinding` or `@HostListener` decorators. Define host bindings in the `host` property of `@Component` or `@Directive` decorator metadata.
+- Use `NgOptimizedImage` for all static image URLs. It does not work with inline base64 images — for base64, fallback to standard `[src]` binding.
+
+### Component Design
+- Set `changeDetection: ChangeDetectionStrategy.OnPush` in every `@Component` decorator.
+- Use `input()`, `output()`, `model()`, and `viewChild()` signal-based functions. Never use their decorator equivalents (`@Input`, `@Output`, `@ViewChild`).
+- Use `computed()` for all derived state. Never recompute values in templates or getter methods.
+- Prefer inline templates for components with < 20 lines of HTML. For external templates, always use paths relative to the component TypeScript file.
+- Never use `ngClass` or `ngStyle` directives. Use `[class]` and `[style]` bindings instead.
+- Components must be small and focused on a single responsibility.
+
+### State Management
+- Use Angular `signal()` for all local component state.
+- Use `computed()` for derived synchronous state.
+- Never call `mutate()` on signals. Use `update()` or `set()` instead to ensure immutability.
+- Keep state transformations pure — no side effects inside computed signals.
+- For cross-component shared state, prefer services with `signal()` + `computed()` over third-party state libraries unless project scale demands it.
+
+### Templates
+- Use only Angular built-in control flow: `@if`, `@else if`, `@else`, `@for`, `@empty`, `@switch`, `@case`, `@default`.
+- Never use legacy structural directives: `*ngIf`, `*ngFor`, `*ngSwitch`.
+- Use `@let` for template-local variable declarations (available in Angular v18+).
+- Keep templates logic-free: move complex logic to component class properties or computed signals.
+- Use the `async` pipe for observable subscriptions. Never manually subscribe in components.
+- Do not assume browser globals like `window`, `document`, `navigator`, `new Date()` are available in templates. Pre-compute such values in the component class.
+
+### Services & Dependency Injection
+- Use the `inject()` function exclusively for dependency injection. Never use constructor injection.
+- Design services around a single responsibility.
+- Use `providedIn: 'root'` for singleton services unless a specific provider scope is needed.
+- Services must expose reactive state via signals or observables.
+
+### Reactive Forms
+- Always use Reactive Forms (`ReactiveFormsModule`). Never use Template-driven Forms.
+- Form models must be typed using `FormControl<T>`, `FormGroup<T>`, `FormArray<T>`.
+- Use `[formControl]` binding for individual controls when possible.
+
+### Routing & Lazy Loading
+- Implement lazy loading for all feature routes using `loadComponent` or `loadChildren`.
+- Default to `loadComponent` for leaf routes pointing to standalone components.
+
+### AEM SPA Editor Integration Rules
+- Components rendered inside AEM containers must be designed to work with AEM's SPA Editor lifecycle.
+- Export a mappable component class from every AEM-mapped component using standard AEM SPA Model Manager conventions.
+- AEM-mapped components must accept properties via a typed model interface matching the Sling Model exported from AEM.
+- Use the `MapTo` function from `@adobe/aem-spa-page-model-manager` to register components.
+- Keep AEM-specific logic isolated within dedicated services. Do not spread AEM API calls across components.
+- Ensure all AEM-mapped components handle authoring state gracefully (show placeholders when content is empty in Edit mode).
+
+### Accessibility (MANDATORY)
+- All components MUST pass AXE accessibility checks.
+- Must meet WCAG 2.2 Level AA at minimum.
+- Ensure proper focus management, especially after route changes and dynamic content updates.
+- Color contrast ratios must meet AA standards (4.5:1 for normal text, 3:1 for large text).
+- Use semantic HTML and appropriate ARIA attributes.
+- Test with keyboard navigation: all interactive elements must be reachable and operable.
+
+---
+
+## Response Language Rule
+- Create file .md located on `/docs/basic`. Then add new file path to vitepress config: `.vitepress/config.ts`
+- **Always respond in Vietnamese (tiếng Việt).**
+- Code syntax, variable names, component selectors, technical identifiers, and framework-specific keywords remain in English.
+- All explanations, comments, documentation, and guidance are in Vietnamese.
+
