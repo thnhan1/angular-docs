@@ -2,6 +2,7 @@
   "name": "angular-docs",
   "version": "1.0.0",
   "description": "Angular self-learning documentation",
+  "type": "module",
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build",
